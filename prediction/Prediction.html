@@ -1,0 +1,21 @@
+{{ block title }}{{prediction_questions}}{{ endblock }}
+{{ block content }}
+
+<h2>Please fill in these parameters as in the example:</h2>
+
+<div class="row">
+    <div class="col-sm">
+<img src="{% static 'global/settings.png' %}">
+    </div>
+    <div class="col-sm">
+      {{formfields}}
+        <div style="text-align: center;">
+    {{ next_button }}
+</div>
+    </div>
+
+  </div>
+
+
+
+{{ endblock }}

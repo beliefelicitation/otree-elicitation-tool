@@ -1,0 +1,34 @@
+
+<div class="card bg-light m-3">
+    <div class="card-body">
+        {{if interface == "ours"}}
+            <p>
+                You can adjust the bar-graph by <strong>adding, moving or removing</strong> anchor-points:
+                <ul>
+                <li>
+                    You can <strong>add</strong> anchor-points by <strong>clicking</strong> anywhere on the graph creates.
+                            </li>
+                <li>
+                    You can <strong>move</strong> anchor-points around by <strong>dragging</strong> them.        </li>
+                <li>
+                   You can <strong>remove</strong> anchor-points by <strong>clicking</strong> on them.        </li>
+
+                </ul>
+            </p>
+{{elif interface == "number"}}
+            <p>
+    You can adjust the bar-graph by <strong>entering</strong> a numerical bar height for each  bar in the respective text field below the horizontal axis.
+            </p>
+{{elif interface == "bins"}}
+            <p>
+    You can adjust the bar-graph by <strong>dragging</strong> each bar up or down. <strong>Click</strong> on the top of the bar to drag it.
+            </p>
+    {{elif interface == "metaculus"}}
+            <p>
+    You can adjust the bar-graph by <strong>adjusting</strong> the position of the horizontal slider buttons below the graph.
+            </p>
+        <p>You can add additional sliders to fine-tune the bar-graph.</p>
+        {{endif}}
+    </div>
+</div>
+

@@ -1,0 +1,157 @@
+{{ block title }}{{ endblock }}
+<link rel="stylesheet" type="text/css" href="{% static 'global/custom.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'nouislider.css' %}"/>
+<style>
+    .loadbar {
+    width: 36px;
+    text-align: center;
+    height: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+   }
+    .bar
+    {
+    width: 100%;
+    display: block;
+    font-family: arial;
+    font-size: 12px;
+    background-color: #0d6efd;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    }
+    #topchart{
+    /*position: absolute;*/
+    left: 120px;
+     top:0px;
+    z-index: 1;
+    }
+
+    .otree-timer {
+        text-align: center;
+    }
+
+    .page-header {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 10px;
+}
+    #model{
+    /*position: absolute;
+
+
+
+    right: 40px;
+        margin-top: 10px;
+    width: 33%;
+     */
+    height: 200px;
+    z-index: 1;
+    border: #136dfa 1px solid;
+    background: #FFF;
+    border-radius: 5px;
+    }
+</style>
+{{block style}}{{endblock}}
+{{ block content }}
+    {{include "global/instructions.html"}}
+
+
+    <h1 style="text-align: center">
+      {{prediction_questions}}
+    </h1>
+
+<figure class="highcharts-figure">
+
+
+    <div class="container">
+
+<div id="timer"></div>
+
+
+        <div class="row">
+    <div class="col">
+
+ <div style="text-align: left;
+    /*position: absolute;
+        margin-left: 50px;
+    right: 50px;
+    z-index: 2;*/">
+     {{if interface == "ours"}}
+    <button id="undo"  class="btn  btn-warning"  disabled  type="button">Undo</button>
+    <button id="reset" class="btn  btn-danger" disabled  type="button">Reset</button>
+    <button id="normalize" class="btn  btn-info"   type="button">Normalize</button>
+     {{endif}}
+    </div>
+
+    </div>
+    <div class="col">
+
+    <div class="mt-0 " style="text-align: right; height: 40px">
+        <button class="btn btn-success" id="validate_btn"> Validate </button>
+    </div>
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="bins_container" style="display: none;    position: relative;width: 100%;">
+        <div id="binsliders" class="d-flex justify-content-between">
+        </div>
+    </div>
+
+
+    <div id="draw"></div>
+
+</div>
+</figure>
+
+<div id="sliders">
+   <div class="slider mt-3" id="slider_0"></div>
+</div>
+<div class="mt-0" style="text-align: center;">
+<button id="add_component" style="display: none"  class="btn  btn-warning mt-3" type="button">Add a slider</button>
+<button id="remove_component" style="display: none"  class="btn  btn-danger mt-3" type="button">Remove last slider</button>
+
+</div>
+<div id="binsinput" class="d-flex justify-content-around"></div>
+<div id="alert" style="display:none">You can't add a point so close to another one!</div>
+
+  <div id="topchart" class=" text-center" style="display: none" >
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+
+                <input type="radio" class="btn-check" name="mode" id="curve-mode" autocomplete="off" value="curve" checked>
+                <label class="btn btn-outline-primary" for="curve-mode">Point mode</label>
+
+                <input type="radio" class="btn-check" name="mode" id="bins-mode" autocomplete="off" value="bins">
+                <label class="btn btn-outline-primary" for="bins-mode">Bins mode</label>
+                </div>
+
+            </div>
+
+
+{{ endblock }}
+
+{{ block scripts }}
+<script src="{% static 'nouislider.min.js' %}"></script>
+<script src="{% static 'math.js' %}"></script>
+<script src="{% static 'highcharts.js' %}"></script>
+<script src="{% static 'draggable-points.js' %}"></script>
+<script src="{% static 'global/script.js' %}"></script>
+<script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+{{ endblock }}
