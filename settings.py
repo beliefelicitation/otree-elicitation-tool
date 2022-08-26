@@ -112,7 +112,11 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 
 DEMO_PAGE_INTRO_HTML = """
-<a class="btn btn-primary" href="https://beliefelicitation.github.io/">Go to the main website</a>
+<h2>Aim of the paper</h2>
+We think that a belief elicitation interface should:
+<ul><li>be <strong>easy to understand</strong>;</li><li>allow for <strong>all sort of beliefs</strong>, from simple point estimates to bimodal distributions and more, without imposing any structure;</li><li>manage <strong>not to get in the way</strong> of subjects;</li><li><strong>help subjects</strong> easily express what they believe;</li><li>be <strong>fast</strong>, <strong>responsive</strong>, and <strong>accurate</strong>.</li></ul>
+<p>There are several interfaces out there.</p>
+<a class="btn btn-primary" href="https://beliefelicitation.github.io/">Go to the project website</a>
 """
 
 

@@ -303,7 +303,6 @@ chart.series[1].setData(data_bins,true);
 chart.series[0].setData(data_curve,true);
 
 
-console.log(max_zoom(max_height));
 chart.yAxis[0].setExtremes(0,max_zoom(max_height));
 chart.series[0].update({dragDrop: {dragMaxY:chart.yAxis[0].max}});
 save();
@@ -582,7 +581,6 @@ var chartoptions = {
 								labels: {
                 formatter: function () {
                 let tick =  min_tick + this.value*(nb_bins-1)*step_tick;
-				console.log(this.value,nb_bins,step_tick,min_tick + Math.round(100*(this.value*(nb_bins-1)*step_tick))/100);
 				if(prediction){
 					if(tick >= 1000){
 						return Number((tick/1000).toFixed(2))+'k '+js_vars.xUnit;
