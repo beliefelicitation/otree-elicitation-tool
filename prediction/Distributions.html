@@ -1,7 +1,7 @@
 {{ block title }}{{ endblock }}
 {{block styles }}
-<link rel="stylesheet" type="text/css" href="{% static 'prediction/custom.css' %}"/>
-<link rel="stylesheet" type="text/css" href="{% static 'prediction/nouislider.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{{ static 'prediction/custom.css' }}"/>
+<link rel="stylesheet" type="text/css" href="{{ static 'prediction/nouislider.css' }}"/>
 <style>
     .loadbar {
     width: 36px;
@@ -150,10 +150,10 @@
 {{ endblock }}
 
 {{ block scripts }}
-<script src="{% static 'prediction/nouislider.min.js' %}"></script>
-<script src="{% static 'prediction/math.js' %}"></script>
-<script src="{% static 'prediction/highcharts.js' %}"></script>
-<script src="{% static 'prediction/draggable-points.js' %}"></script>
-<script src="{% static 'prediction/script.js' %}"></script>
-<script src="{% static 'prediction/bootstrap.bundle.min.js' %}"></script>
+<script src="{{ static 'prediction/nouislider.min.js' }}"></script>
+<script src="{{ static 'prediction/math.js' }}"></script>
+<script src="{{ static 'prediction/highcharts.js' }}"></script>
+<script src="{{ static 'prediction/draggable-points.js' }}"></script>
+<script src="{{ static 'prediction/script.js' }}"></script>
+<script src="{{ static 'prediction/bootstrap.bundle.min.js' }}"></script>
 {{ endblock }}
