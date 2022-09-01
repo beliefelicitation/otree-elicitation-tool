@@ -1,6 +1,5 @@
 from otree.api import *
-import json, numpy
-c = Currency  # old name for currency; you can delete this.
+import json
 
 
 doc = """
