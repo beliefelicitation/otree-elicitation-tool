@@ -1,4 +1,5 @@
 {{ block title }}{{ endblock }}
+{{block styles }}
 <link rel="stylesheet" type="text/css" href="{% static 'global/custom.css' %}"/>
 <link rel="stylesheet" type="text/css" href="{% static 'nouislider.css' %}"/>
 <style>
@@ -55,7 +56,8 @@
     border-radius: 5px;
     }
 </style>
-{{block style}}{{endblock}}
+
+{{endblock}}
 {{ block content }}
     {{include "global/instructions.html"}}
 
