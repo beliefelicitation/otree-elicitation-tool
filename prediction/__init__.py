@@ -7,11 +7,11 @@ Elicitation belief app
 """
 
 
-class Constants(BaseConstants):
-    name_in_url = 'prediction'
-    players_per_group = None
+class C(BaseConstants):
+    NAME_IN_URL = 'prediction'
+    PLAYERS_PER_GROUP = None
 
-    def prediction_questions():
+    def PREDICTION_QUESTIONS():
 
         return [
             dict(
@@ -29,7 +29,7 @@ class Constants(BaseConstants):
             )
         ]
 
-    num_rounds = len(prediction_questions())
+    NUM_ROUNDS = len(PREDICTION_QUESTIONS())
 
 
 class Subsession(BaseSubsession):
@@ -66,7 +66,7 @@ class End(Page):
 
     @staticmethod
     def is_displayed(player: Player):
-        return player.round_number == Constants.num_rounds
+        return player.round_number == C.NUM_ROUNDS
 
 
 class Prediction(Page):
@@ -76,7 +76,7 @@ class Prediction(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            prediction_questions = Constants.prediction_questions()[player.round_number-1]["q"],
+            prediction_questions = C.PREDICTION_QUESTIONS()[player.round_number-1]["q"],
         )
 
     @staticmethod
@@ -117,9 +117,9 @@ class Distributions(Page):
     @staticmethod
     def js_vars(player):
         if not player.session.config["self"]:
-            player.min = Constants.prediction_questions()[player.round_number-1]["min"]
-            player.nb_bins = Constants.prediction_questions()[player.round_number-1]["nb_bins"]
-            player.max = Constants.prediction_questions()[player.round_number-1]["min"]+Constants.prediction_questions()[player.round_number-1]["step"]*(Constants.prediction_questions()[player.round_number-1]["nb_bins"]-1)
+            player.min = C.PREDICTION_QUESTIONS()[player.round_number-1]["min"]
+            player.nb_bins = C.PREDICTION_QUESTIONS()[player.round_number-1]["nb_bins"]
+            player.max = C.PREDICTION_QUESTIONS()[player.round_number-1]["min"]+C.PREDICTION_QUESTIONS()[player.round_number-1]["step"]*(C.PREDICTION_QUESTIONS()[player.round_number-1]["nb_bins"]-1)
             print(player.max)
 
         return dict(
@@ -129,14 +129,14 @@ class Distributions(Page):
             min = player.min,
             step = (player.max-player.min)/(player.nb_bins-1),
             nb_bins = player.nb_bins,
-            xUnit = Constants.prediction_questions()[player.round_number-1]["unit"],
+            xUnit = C.PREDICTION_QUESTIONS()[player.round_number-1]["unit"],
             min_timeout=30,
         )
 
     @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            prediction_questions = Constants.prediction_questions()[player.round_number-1]["q"],
+            prediction_questions = C.PREDICTION_QUESTIONS()[player.round_number-1]["q"],
             interface=player.participant.interface,
         )
 
