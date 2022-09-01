@@ -72,6 +72,9 @@ class End(Page):
 
 
 class Prediction(Page):
+    # TODO: Chris comment: shouldn't this page be called 'Configuration'?
+    # and rename the 'self' session config param to 'configuration'? etc
+
     form_model = 'player'
     form_fields = ["min", "max", "nb_bins"]
 
