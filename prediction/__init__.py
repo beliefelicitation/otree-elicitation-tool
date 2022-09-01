@@ -11,9 +11,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'prediction'
     PLAYERS_PER_GROUP = None
 
-    def PREDICTION_QUESTIONS():
-
-        return [
+    PREDICTION_QUESTIONS = [
             dict(
         q="What will be the temperature (°F) in New York City at noon on the 10th of September, 2022?",
         min=60,
@@ -29,7 +27,7 @@ class C(BaseConstants):
             )
         ]
 
-    NUM_ROUNDS = len(PREDICTION_QUESTIONS())
+    NUM_ROUNDS = len(PREDICTION_QUESTIONS)
 
 
 class Subsession(BaseSubsession):
@@ -49,9 +47,10 @@ class Player(BasePlayer):
 
 
 def creating_session(subsession: Subsession):
-    if 'interface' in subsession.session.config:
+    session = subsession.session
+    if 'interface' in session.config:
         for player in subsession.get_players():
-            player.interface = subsession.session.config["interface"]
+            player.interface = session.config["interface"]
             player.participant.interface = player.interface
     else:
         import itertools
@@ -74,9 +73,14 @@ class Prediction(Page):
     form_fields = ["min","max","nb_bins"]
 
     @staticmethod
+    def is_displayed(player: Player):
+        session = player.session
+        return session.config["self"] == True
+
+    @staticmethod
     def vars_for_template(player: Player):
         return dict(
-            prediction_questions = C.PREDICTION_QUESTIONS()[player.round_number-1]["q"],
+            prediction_questions = C.PREDICTION_QUESTIONS[player.round_number-1]["q"],
         )
 
     @staticmethod
@@ -84,20 +88,14 @@ class Prediction(Page):
         if values['max'] <= values['min']:
             return 'Max value should be superior to Min value!'
 
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.session.config["self"] == True
-
 class Distributions(Page):
-
-    form_model = 'player'
-    form_fields = []
 
     timer_text = 'Time left to make your prediction:'
 
     @staticmethod
     def get_timeout_seconds(player):
-        if player.session.config["timeout"]:
+        session = player.session
+        if session.config["timeout"]:
             return 90
 
     @staticmethod
@@ -107,37 +105,36 @@ class Distributions(Page):
         player.history = json.dumps(history)
         player.data = json.dumps(data["history"]["data"])
 
-    @staticmethod
-    def before_next_page(player, timeout_happened):
-        pass
-#        if timeout_happened:
-#            player.timeout = True
-
 
     @staticmethod
-    def js_vars(player):
-        if not player.session.config["self"]:
-            player.min = C.PREDICTION_QUESTIONS()[player.round_number-1]["min"]
-            player.nb_bins = C.PREDICTION_QUESTIONS()[player.round_number-1]["nb_bins"]
-            player.max = C.PREDICTION_QUESTIONS()[player.round_number-1]["min"]+C.PREDICTION_QUESTIONS()[player.round_number-1]["step"]*(C.PREDICTION_QUESTIONS()[player.round_number-1]["nb_bins"]-1)
-            print(player.max)
+    def js_vars(player: Player):
+        session = player.session
+        participant = player.participant
+
+        pq = C.PREDICTION_QUESTIONS[player.round_number-1]
+        if not session.config["self"]:
+            player.min = pq["min"]
+            player.nb_bins = pq["nb_bins"]
+            player.max = pq["min"]+pq["step"]*(pq["nb_bins"]-1)
 
         return dict(
-            interface = player.participant.interface,
+            interface = participant.interface,
             prediction = True,
             yMax = 1,
             min = player.min,
             step = (player.max-player.min)/(player.nb_bins-1),
             nb_bins = player.nb_bins,
-            xUnit = C.PREDICTION_QUESTIONS()[player.round_number-1]["unit"],
+            xUnit = pq["unit"],
             min_timeout=30,
         )
 
     @staticmethod
     def vars_for_template(player: Player):
+        participant = player.participant
+        pq = C.PREDICTION_QUESTIONS[player.round_number - 1]
         return dict(
-            prediction_questions = C.PREDICTION_QUESTIONS()[player.round_number-1]["q"],
-            interface=player.participant.interface,
+            prediction_questions = pq["q"],
+            interface=participant.interface,
         )
 
 page_sequence = [Prediction,Distributions,End]
