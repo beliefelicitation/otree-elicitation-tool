@@ -120,6 +120,6 @@ There are several interfaces out there.</p>
 """
 
 
-SECRET_KEY = environ.get('OTREE_SECRET_KEY')
+SECRET_KEY = environ.get('OTREE_SECRET_KEY') or 'kbohidoecdoatukacaanqthanapanhanan'
 
 INSTALLED_APPS = ['otree']
