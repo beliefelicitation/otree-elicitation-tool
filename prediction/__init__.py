@@ -56,7 +56,7 @@ def creating_session(subsession: Subsession):
     else:
         import itertools
 
-        interfaces = itertools.cycle(["ours", "number", "bins", "metaculus"])
+        interfaces = itertools.cycle(["click-drag", "number", "bins", "metaculus"])
         for player in subsession.get_players():
             player.interface = next(interfaces)
             player.participant.interface = player.interface

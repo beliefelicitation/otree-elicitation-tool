@@ -482,7 +482,7 @@ var chartoptions = {
 
 
             			click: function(e){
-						if(interface=="ours") {
+						if(interface=="click-drag") {
 							add_point(this.series[0], e.xAxis[0].value, e.yAxis[0].value)
 						}
 						},
@@ -831,7 +831,7 @@ type : "line",
 function drawDefaultChart() {
     chart = new Highcharts.Chart('draw', chartoptions);
 
-    if (interface == "ours"){
+    if (interface == "click-drag"){
 		settocurve();
 	}else{
 		settobins();
@@ -1112,7 +1112,7 @@ $('#remove_component').on('click', function(){
 });
 
 
-}else if((interface=="bins") || (interface=="ours")){
+}else if((interface=="bins") || (interface=="click-drag")){
 
 	if(interface=="bins") {
 		$('#bins_container').show();

@@ -4,20 +4,20 @@ from os import environ
 SESSION_CONFIGS = [
     dict(
         name='drag_self',
-        display_name="Drag and drop interface (player set min,max,nbins)",
+        display_name="Click and drag belief elicitation main interface (player set min,max,nbins)",
         app_sequence=['prediction'],
         beta=False,
-        interface="ours",
+        interface="click-drag",
         timeout=False,
         num_demo_participants=1,
         self=True
     ),
     dict(
         name='drag',
-        display_name="Drag and drop interface",
+        display_name="Click and drag belief elicitation main interface",
         app_sequence=['prediction'],
         beta=False,
-        interface="ours",
+        interface="click-drag",
         timeout=False,
         num_demo_participants=1,
         self=False
@@ -112,7 +112,7 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 
 DEMO_PAGE_INTRO_HTML = """
-<p><strong>Aim of the paper</strong></p>
+<p><strong>Aim of the interface</strong></p>
 <p>We think that a belief elicitation interface should:
 <ul><li>be <strong>easy to understand</strong>;</li><li>allow for <strong>all sort of beliefs</strong>, from simple point estimates to bimodal distributions and more, without imposing any structure;</li><li>manage <strong>not to get in the way</strong> of subjects;</li><li><strong>help subjects</strong> easily express what they believe;</li><li>be <strong>fast</strong>, <strong>responsive</strong>, and <strong>accurate</strong>.</li></ul>
 There are several interfaces out there.</p>
